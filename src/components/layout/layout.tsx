@@ -1,19 +1,12 @@
 import React, { useState } from 'react';
 import { Outlet, Link } from 'react-router-dom';
 import { Menubar } from 'primereact/menubar';
-import { Sidebar } from 'primereact/sidebar';
 import { Button } from 'primereact/button';
+import logo from '../../assets/onlyicon.png'
 import './layout.scss';
 
 const Layout: React.FC = () => {
-    const [sidebarVisible, setSidebarVisible] = useState(false);
-
-    const topNavItems = [
-        { label: 'Home', icon: 'pi pi-home', command: () => window.location.href = '/' },
-        { label: 'Profile', icon: 'pi pi-user', command: () => console.log('Profile clicked') },
-        { label: 'Settings', icon: 'pi pi-cog', command: () => console.log('Settings clicked') },
-        { label: 'Logout', icon: 'pi pi-sign-out', command: () => console.log('Logout clicked') }
-    ];
+    const [isCollapsed, setIsCollapsed] = useState(false);
 
     const sideNavItems = [
         { label: 'Dashboard', icon: 'pi pi-chart-line', to: '/dashboard' },
@@ -23,37 +16,54 @@ const Layout: React.FC = () => {
     ];
 
     return (
-        <div className="layout-container">
+        <div className={`layout-container ${isCollapsed ? 'collapsed' : ''}`}>
             <Menubar
                 className="topnav"
-                model={topNavItems}
-                start={<div className="logo">Facilities</div>}
-                end={<Button icon="pi pi-bars" onClick={() => setSidebarVisible(true)} />}
+                model={[]}
+                start={
+                    <div className="topnav-left">
+                        <Button 
+                            icon="pi pi-bars" 
+                            rounded 
+                            text 
+                            aria-label="Toggle Sidebar" 
+                            onClick={() => setIsCollapsed(!isCollapsed)} 
+                        />
+                        <img src={logo} alt="Logo" className="app-logo" />
+                    </div>
+                }
+                end={
+                    <div className="topnav-right">
+                        <Button 
+                            icon="pi pi-sign-out" 
+                            rounded 
+                            text 
+                            aria-label="Logout" 
+                            className="topnav-item logout" 
+                            onClick={() => console.log('Logout clicked')} 
+                        />
+                    </div>
+                }
             />
 
-            <Sidebar
-                visible={sidebarVisible}
-                onHide={() => setSidebarVisible(false)}
-                className="layout-sidebar"
-                showCloseIcon={false}
-            >
-                <div className="sidebar-header">Navigation</div>
-                <ul>
-                    {sideNavItems.map((item, index) => (
-                        <li key={index}>
-                            <Link to={item.to}>
-                                <i className={item.icon}></i>
-                                <span>{item.label}</span>
-                            </Link>
-                        </li>
-                    ))}
-                </ul>
-            </Sidebar>
+            <div className="layout-body">
+                <aside className={`layout-sidebar ${isCollapsed ? 'collapsed' : ''}`}>
+                    <ul className="sidebar-menu">
+                        {sideNavItems.map((item, index) => (
+                            <li key={index} className="sidebar-item">
+                                <Link to={item.to} className="sidebar-link">
+                                    <i className={item.icon}></i>
+                                    {!isCollapsed && <span className="sidebar-label">{item.label}</span>}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                </aside>
 
-            <div className="layout-content">
-                <Outlet />
+                <div className="layout-content">
+                    <Outlet />
+                </div>
             </div>
-
         </div>
     );
 };

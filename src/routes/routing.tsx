@@ -8,8 +8,6 @@ const Routing = () => {
     return (
         <Routes>
             <Route path="/" element={<Login />} />
-
-            {/* Layout wraps the Home route */}
             <Route path="/home" element={<Layout />}>
                 <Route index element={<Home />} />
             </Route>
