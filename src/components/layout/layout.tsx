@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Outlet, Link } from 'react-router-dom';
 import { Menubar } from 'primereact/menubar';
 import { Button } from 'primereact/button';
-import logo from '../../assets/onlyicon.png'
+import { Card } from 'primereact/card';
+import logo from '../../assets/onlyicon.png';
 import './layout.scss';
 
 const Layout: React.FC = () => {
@@ -61,7 +62,9 @@ const Layout: React.FC = () => {
                 </aside>
 
                 <div className="layout-content">
-                    <Outlet />
+                    <Card className="custom-card">
+                        <Outlet />
+                    </Card>
                 </div>
             </div>
         </div>

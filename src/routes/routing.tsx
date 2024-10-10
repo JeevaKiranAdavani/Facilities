@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route ,Navigate } from 'react-router-dom';
 import Home from '../pages/home/home';
 import Login from '../pages/login/login';
 import Layout from '../components/layout/layout';
@@ -7,11 +7,13 @@ import Layout from '../components/layout/layout';
 const Routing = () => {
     return (
         <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/home" element={<Layout />}>
-                <Route index element={<Home />} />
-            </Route>
-        </Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Navigate to="/login" />} />
+        
+        <Route element={<Layout />}>
+            <Route path="/home" element={<Home />} />
+        </Route>
+    </Routes>
     );
 };
 
