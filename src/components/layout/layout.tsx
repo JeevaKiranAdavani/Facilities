@@ -15,10 +15,7 @@ const Layout = () => {
     };
 
     const menuItems = [
-        { label: 'Home', icon: 'pi pi-home', to: '/home' },
-        { label: 'Users', icon: 'pi pi-users', to: '/users' },
-        { label: 'Reports', icon: 'pi pi-chart-line', to: '/reports' },
-        { label: 'Settings', icon: 'pi pi-cog', to: '/settings' }
+        { label: 'Dashboard', icon: 'pi pi-home', to: '/home' }
     ];
 
     const handleMenuClick = (label:any ) => {
