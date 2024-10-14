@@ -4,7 +4,8 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import "./home.scss";
 import { Orders } from "../services/Orders";
-
+import { useNavigate } from 'react-router-dom';
+import { Card } from "primereact/card";
 const Home = () => {
 
     const cardData = [
@@ -43,7 +44,7 @@ const Home = () => {
 
   const paginatorLeft = <Button type="button" icon="pi pi-refresh" text />;
   const paginatorRight = <Button type="button" icon="pi pi-download" text />;
-
+  const navigate = useNavigate();
   useEffect(() => {
     Orders
 .getCustomersMedium().then((data: any) =>
@@ -51,9 +52,12 @@ const Home = () => {
     );
   }, []);
   const handleView = (rowData:any) => {
-    console.log("Row data:", rowData);
+    // navigate("/home/view-checkins")
    
   };
+  const handleViewData=()=>{
+    navigate("/home/view-checkins")
+  }
   return (
     <div>
        <div className="grid custom-card">
@@ -82,6 +86,19 @@ const Home = () => {
       ))}
     </div>
       <div className="card">
+        {/* <h5>Customers</h5> */}
+        <div className="viewAll-wrapper">
+            <div>
+                <h4>Check-Ins | Latest Update at 8:52:00 PM </h4>
+            </div>
+            <div>
+                {/* <Button className=" 
+"  text  icon="pi pi-table
+" onClick={handleViewData}> &nbsp; View All</Button> */}
+<Button type="button" style={{backgroundColor: "#094679" ,color: "#ffff" }} onClick={handleViewData} label="View All" badge="10" icon="pi pi-table" outlined  badgeClassName="p-badge-danger" />
+
+            </div>
+        </div>
   <div className="custom-scrollbar">
     <DataTable
       value={customers}
@@ -103,14 +120,18 @@ const Home = () => {
       <Column
         sortable  field="representative.name"
         header="Action"
-        style={{ width: "15%" }} 
+     
+        className="action-column"
         body={(rowData) => (
-          <Button label="View" className="bgColor" onClick={() => handleView(rowData)} />
+            <Button label="View" className="bgColor" onClick={() => handleView(rowData)} />
         )}
-      />
-    </DataTable>
-  </div>
-</div>
+    />
+</DataTable>
+
+
+
+      </div>
+    </div>
 
     </div>
   );

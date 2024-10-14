@@ -10,13 +10,18 @@
         .main-content {
             flex-grow: 1;
             padding: 20px;
-            background-color: #f5f5f5;
+            background-color: #f5f5f5; 
         }
     }
 }
-
+.viewAll-wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
 .bgColor {
     background-color: #094679 !important;
+    
     border-color: none !important;
 }
 
