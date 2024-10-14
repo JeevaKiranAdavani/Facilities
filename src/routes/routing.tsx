@@ -1,6 +1,8 @@
 import { Routes, Route ,Navigate } from 'react-router-dom';
 import Home from '../pages/home/home';
 import Login from '../pages/login/login';
+import SignUp from '../pages/registration/registration';
+import CheckIn from '../pages/checkin/checkin';
 import Layout from '../components/layout/layout';
 import ViewCheck_in from '../pages/viewCheck_in/viewCheck_in';
 import CheckInDetail from '../pages/check-in-detail/checkInDetail';
@@ -11,6 +13,9 @@ const Routing = () => {
         <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Navigate to="/login" />} />
+        <Route path='/signup' element={<SignUp />} />
+        <Route path='/checkin' element={<CheckIn />}/>
+        
         <Route element={<Layout />}>
         <Route path="/home" element={<Home />} />
         <Route path="/home/view-checkins" element={<ViewCheck_in />} />
