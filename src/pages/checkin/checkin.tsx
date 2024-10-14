@@ -3,11 +3,10 @@ import { InputText } from 'primereact/inputtext';
 import logo from '../../assets/onlyicon.png';
 import { Button } from 'primereact/button';
 import { useNavigate } from 'react-router-dom';
-import './checkin.scss'; // Import the updated CSS file
-
+import './checkin.scss';
 const Checkin = () => {
     const [username, setUsername] = useState('');
-    const [inboundOutbound, setInboundOutbound] = useState('inbound'); // Default to 'outbound'
+    const [inboundOutbound, setInboundOutbound] = useState('inbound');
     const [appointmentNumber, setAppointmentNumber] = useState('');
     const [appointmentDocumentUrl, setAppointmentDocumentUrl] = useState<File | null>(null);
     const [licenseDocumentUrl, setLicenseDocumentUrl] = useState<File | null>(null);
@@ -25,13 +24,12 @@ const Checkin = () => {
         if (!licenseDocumentUrl) newErrors.licenseDocumentUrl = 'License document is required';
 
         setErrors(newErrors);
-        return Object.keys(newErrors).length === 0; // Return true if no errors
+        return Object.keys(newErrors).length === 0;
     };
 
     const handleCheckin = () => {
-        if (!validateForm()) return; // Stop if validation fails
+        if (!validateForm()) return;
 
-        // Perform check-in logic here (e.g., API call)
         console.log({
             username,
             inboundOutbound,
@@ -40,12 +38,12 @@ const Checkin = () => {
             licenseDocumentUrl,
             truckNumber,
         });
-        // Navigate to the home page after successful check-in
+
         navigate('/home');
     };
 
     const onUpload = (files: File[]) => {
-        // Logic to handle file uploads
+
     };
 
     return (
@@ -54,7 +52,6 @@ const Checkin = () => {
                 <img src={logo} alt="Logo" className="logo" />
                 <h2>Check In</h2>
 
-                {/* Input fields with error messages */}
                 <div className="input-group">
                     <InputText
                         value={username}
@@ -80,7 +77,6 @@ const Checkin = () => {
                     {errors.appointmentNumber && <small className="error-message">{errors.appointmentNumber}</small>}
                 </div>
 
-                {/* Toggle between Inbound and Outbound */}
                 <div className="toggle-buttons">
                     <Button
                         label="Inbound"
@@ -93,8 +89,7 @@ const Checkin = () => {
                         onClick={() => setInboundOutbound('outbound')}
                     />
                 </div>
-                
-                {/* File Upload Inputs */}
+
                 <div className="input-group file-upload-group">
                     <label htmlFor="appointmentDocument">Appointment Document Upload</label>
                     <Button
@@ -106,7 +101,7 @@ const Checkin = () => {
                         type="file"
                         id="appointmentUpload"
                         style={{ display: 'none' }}
-                        accept=".pdf,.doc,.docx" // Specify accepted file types
+                        accept=".pdf,.doc,.docx"
                         onChange={(e) => e.target.files && onUpload(Array.from(e.target.files))}
                     />
                     {errors.appointmentDocumentUrl && <small className="error-message">{errors.appointmentDocumentUrl}</small>}
@@ -123,13 +118,13 @@ const Checkin = () => {
                         type="file"
                         id="licenseUpload"
                         style={{ display: 'none' }}
-                        accept=".pdf,.doc,.docx" // Specify accepted file types
+                        accept=".pdf,.doc,.docx"
                         onChange={(e) => e.target.files && onUpload(Array.from(e.target.files))}
                     />
                     {errors.licenseDocumentUrl && <small className="error-message">{errors.licenseDocumentUrl}</small>}
                 </div>
-                
-                {/* Check-in Button */}
+
+
                 <Button label="Check In" onClick={handleCheckin} className="checkin-button" />
             </div>
         </div>

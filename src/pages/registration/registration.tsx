@@ -1,4 +1,3 @@
-// src/pages/Signup.tsx
 import { useState } from 'react';
 import { InputText } from 'primereact/inputtext';
 import logo from '../../assets/onlyicon.png';
@@ -24,13 +23,12 @@ const Registration = () => {
         if (!licenseDocument) newErrors.licenseDocument = 'License document is required';
 
         setErrors(newErrors);
-        return Object.keys(newErrors).length === 0; // Return true if no errors
+        return Object.keys(newErrors).length === 0;
     };
 
     const handleSignup = () => {
-        if (!validateForm()) return; // Stop if validation fails
+        if (!validateForm()) return;
 
-        // Perform signup logic here (e.g., API call)
         console.log({
             username,
             phoneNumber,
@@ -38,12 +36,12 @@ const Registration = () => {
             licenseDocument,
             password,
         });
-        // Navigate to the home page after successful signup
+
         navigate('/home');
     };
 
     const onUpload = (files: File[]) => {
-        setLicenseDocument(files[0]); // Assuming only one file upload for the license document
+        setLicenseDocument(files[0]);
     };
 
     return (
@@ -104,7 +102,7 @@ const Registration = () => {
                         type="file"
                         id="fileUpload"
                         style={{ display: 'none' }}
-                        accept="application/pdf,application/vnd.ms-excel" // Accept PDF and Excel files
+                        accept="application/pdf,application/vnd.ms-excel"
                         onChange={(e) => e.target.files && onUpload(Array.from(e.target.files))}
                     />
                 </div>

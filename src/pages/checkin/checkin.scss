@@ -2,110 +2,110 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; 
+    height: 100vh;
     background: rgb(2, 0, 36);
     background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 70, 121, 1) 49%, rgba(0, 212, 255, 1) 100%);
-  }
-  
-  .checkin-box {
-    background-color: #ffffff; 
-    padding: 2rem; 
-    border-radius: 10px; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.checkin-box {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     max-width: 400px;
     width: 100%;
-  
+
     .logo {
-      display: block;
-      border-radius: 50%;
-      margin: 0 auto 1rem; 
-      max-width: 100px; 
-    }
-  
-    h2 {
-      text-align: center;
-      margin-bottom: 2rem;
-      color: #333;
-    }
-  
-    .input-group {
-      margin-bottom: 1.5rem;
-      position: relative; 
-      height: 50px; 
-  
-      label {
         display: block;
-        margin-bottom: 0.5rem;
-        font-weight: bold;
+        border-radius: 50%;
+        margin: 0 auto 1rem;
+        max-width: 100px;
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 2rem;
         color: #333;
-      }
-  
-      input,
-      textarea {
+    }
+
+    .input-group {
+        margin-bottom: 1.5rem;
+        position: relative;
+        height: 50px;
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            font-size: 1rem;
+            transition: border-color 0.2s ease;
+
+            &:focus {
+                border-color: #007ad9;
+                outline: none;
+            }
+        }
+
+        .p-fileupload {
+            width: 100%;
+        }
+    }
+
+    .file-upload-group {
+        display: flex;
+        align-items: center;
+
+        label {
+            margin-right: 10px;
+        }
+
+        .choose-button {
+            margin-left: 10px;
+        }
+    }
+
+    .checkin-button {
         width: 100%;
         padding: 0.75rem;
-        border: 1px solid #ccc;
-        border-radius: 20px;
         font-size: 1rem;
-        transition: border-color 0.2s ease;
-  
-        &:focus {
-          border-color: #007ad9; 
-          outline: none;
+        background: rgb(2, 0, 36);
+        background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 70, 121, 1) 49%, rgba(0, 212, 255, 1) 100%);
+        border: none;
+        color: #fff;
+        border-radius: 20px;
+        cursor: pointer;
+        text-align: center;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: #005ea6;
         }
-      }
-  
-      .p-fileupload {
-        width: 100%;
-      }
+
+        &:focus {
+            outline: none;
+        }
     }
-  
-    .file-upload-group {
-      display: flex;
-      align-items: center;
-  
-      label {
-        margin-right: 10px; 
-      }
-  
-      .choose-button {
-        margin-left: 10px;
-      }
-    }
-  
-    .checkin-button {
-      width: 100%;
-      padding: 0.75rem;
-      font-size: 1rem;
-      background: rgb(2, 0, 36);
-      background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 70, 121, 1) 49%, rgba(0, 212, 255, 1) 100%);
-      border: none;
-      color: #fff;
-      border-radius: 20px;
-      cursor: pointer;
-      text-align: center;
-      transition: background-color 0.3s ease;
-  
-      &:hover {
-        background-color: #005ea6; 
-      }
-  
-      &:focus {
-        outline: none;
-      }
-    }
-  
+
     .error-message {
-      color: red;
-      font-size: 0.875rem;
-      margin-top: 0.25rem;
+        color: red;
+        font-size: 0.875rem;
+        margin-top: 0.25rem;
     }
 
     .toggle-buttons {
         display: flex;
         margin: 1rem 0;
     }
-    
+
     .toggle-button {
         width: 48%;
         background-color: #e0e0e0;
@@ -113,11 +113,10 @@
         color: #333;
         border-radius: 20px;
     }
-    
+
     .toggle-button.active {
-        background-color: #007ad9; 
+        background-color: #007ad9;
         color: white;
     }
-      
-  }
-  
+
+}

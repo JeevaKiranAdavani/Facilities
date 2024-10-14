@@ -4,7 +4,7 @@ import { Button } from 'primereact/button';
 import { useNavigate } from 'react-router-dom';
 import { dummyUser } from '../../mock/data';
 import './login.scss';
-import logo from '../../assets/onlyicon.png'; 
+import logo from '../../assets/onlyicon.png';
 
 const Login = () => {
     const [username, setUsername] = useState('');
@@ -24,7 +24,7 @@ const Login = () => {
         if (!validateForm()) return;
 
         if (username === dummyUser.username && password === dummyUser.password) {
-            setErrorMessage(''); // Clear error message on successful login
+            setErrorMessage('');
             navigate('/home');
         } else {
             setErrorMessage('Invalid username or password.');
