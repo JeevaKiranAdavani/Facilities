@@ -2,34 +2,39 @@ import React, { useState } from 'react';
 import { Outlet, Link } from 'react-router-dom';
 import { Button } from 'primereact/button';
 import { Avatar } from 'primereact/avatar';
-import logo from '../../assets/applogo.jpg'
+import logo from '../../assets/onlyicon.png';
 import './layout.scss';
 
 const Layout = () => {
-    const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
-    const [activePage, setActivePage] = useState('Home');
+    const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true);
+    const [activePage, setActivePage] = useState('Dashboard');
 
     const loggedInUser = {
-        name: 'John Doe',
-        avatar: '/assets/user-avatar.png'
+        name: 'User',
+        avatar: 'https://images.miraclesoft.com/employee-profile-pics/kvedantam.png'
     };
 
     const menuItems = [
-        { label: 'Dashboard', icon: 'pi pi-home', to: '/home' }
+        { label: 'Dashboard', icon: 'pi pi-home', to: '/home' },
+        { label: 'Appointment', icon: 'pi pi-qrcode', to: '/home' },
+        { label: 'Settings', icon: 'pi pi-cog', to: '/home' },
+        { label: 'WareHouse', icon: 'pi pi-shop', to: '/home' },
     ];
 
-    const handleMenuClick = (label:any ) => {
+    const handleMenuClick = (label: string) => {
         setActivePage(label);
     };
 
     return (
         <div className="layout-wrapper">
             <aside className={`layout-sidebar ${isSidebarCollapsed ? 'collapsed' : ''}`}>
-                <Button 
-                    icon="pi pi-bars" 
-                    className="sidebar-toggle p-button-rounded p-button-text" 
-                    onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)} 
-                />
+                <div className="sidebar-header">
+                    <Button 
+                        icon="pi pi-bars" 
+                        className="sidebar-toggle p-button-rounded p-button-text" 
+                        onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)} 
+                    />
+                </div>
 
                 <div className="sidebar-menu">
                     {menuItems.map((item, index) => (
@@ -45,21 +50,21 @@ const Layout = () => {
                     ))}
                 </div>
 
-                <div className="sidebar-user">
-                    <Avatar image={loggedInUser.avatar} size="large" shape="circle" />
-                    {!isSidebarCollapsed && <span className="username">{loggedInUser.name}</span>}
+                <div className="sidebar-footer">
+                    <img src={logo} alt="Company Logo" className="sidebar-logo" />
                 </div>
-
-                <Link to="/logout" className={`sidebar-item logout-button ${isSidebarCollapsed ? 'collapsed' : ''}`}>
-                    <i className="pi pi-sign-out"></i>
-                    {!isSidebarCollapsed && <span className="logout-text" style={{marginLeft: '10px'}}>Logout</span>}
-                </Link>
             </aside>
 
             <div className="layout-main">
-                <header className="layout-header">
-                    {/* <img src={logo} alt="Company Logo" className="header-logo" /> */}
-                    {/* <h1 >{activePage}</h1> */}
+                <header className="layout-header" >
+                    <h1 className="header-title animated-text">{activePage}</h1>
+                    <div className="header-user">
+                        <span className="username">{loggedInUser.name}</span>
+                        <Avatar image={loggedInUser.avatar} size="large" shape="circle" className="avatar" />
+                        <Link to="/logout" className="logout-button">
+                            <i className="pi pi-sign-out"></i>
+                        </Link>
+                    </div>
                 </header>
                 <div className="layout-content">
                     <Outlet />

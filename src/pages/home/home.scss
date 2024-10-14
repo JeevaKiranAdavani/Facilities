@@ -10,11 +10,53 @@
         .main-content {
             flex-grow: 1;
             padding: 20px;
-            background-color: #f5f5f5; // Adjust background color as needed
+            background-color: #f5f5f5;
         }
     }
 }
-.bgColor{
+
+.bgColor {
     background-color: #094679 !important;
     border-color: none !important;
 }
+
+.custom-scrollbar {
+    height: 400px;
+    overflow: auto; 
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+    width: 5px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.45);
+    border-radius: 10px;
+}
+
+.custom-card .border-round {
+    border-radius: 10px !important;
+   
+}
+
+.custom-icon-card  {
+    animation: bounce 2s ;
+   // background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 70, 121, 1) 1%, rgba(0, 212, 255, 1) 100%);
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-30px);
+    }
+    60% {
+      transform: translateY(-15px);
+    }
+  }
+  
