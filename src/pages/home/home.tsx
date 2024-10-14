@@ -4,13 +4,14 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import "./home.scss";
 import { Orders } from "../services/Orders";
-
+import { useNavigate } from 'react-router-dom';
+import { Card } from "primereact/card";
 const Home = () => {
   const [customers, setCustomers] = useState([]);
 
   const paginatorLeft = <Button type="button" icon="pi pi-refresh" text />;
   const paginatorRight = <Button type="button" icon="pi pi-download" text />;
-
+  const navigate = useNavigate();
   useEffect(() => {
     Orders
 .getCustomersMedium().then((data: any) =>
@@ -18,9 +19,12 @@ const Home = () => {
     );
   }, []);
   const handleView = (rowData:any) => {
-    console.log("Row data:", rowData);
+    // navigate("/home/view-checkins")
    
   };
+  const handleViewData=()=>{
+    navigate("/home/view-checkins")
+  }
   return (
     <div>
       <h1>Dashboard</h1>
@@ -99,37 +103,54 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="card">
-  <div >
-    <DataTable
-      value={customers}
-      paginator
-      rows={5}
-      rowsPerPageOptions={[5, 10, 25, 50]}
-     
-      paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
-      currentPageReportTemplate="{first} to {last} of {totalRecords}"
-      paginatorLeft={paginatorLeft}
-      paginatorRight={paginatorRight}
-      scrollable
-    //   scrollHeight="400px" 
-    //   responsiveLayout="scroll" 
-    >
-      <Column sortable  field="name" header="Name" style={{ width: "15%" }}></Column>
-      <Column sortable  field="type" header="Type" style={{ width: "15%" }}></Column>
-      <Column sortable  field="appointmentId" header="Status" style={{ width: "20%" }}></Column>
-      <Column sortable  field="status" header="Appointment" style={{ width: "20%" }}></Column>
-      <Column
-        sortable  field="representative.name"
+      <div className="viewall">
+      <Card title="Check-in Details"  className="custom-card">
+            <div className="flex justify-content-between align-items-center">
+                {/* Left or center content */}
+                <div>
+                    <p>Some check-in details .</p>
+                </div>
+
+                {/* Button on the right */}
+                <div>
+                    <Button label="View All" icon="pi pi-eye" className="bgColor" onClick={handleViewData} />
+                </div>
+            </div>
+        </Card>
+        </div>
+        <div className="card">
+      <div className="datatable-responsive-wrapper">
+      <DataTable
+    value={customers} resizableColumns showGridlines tableStyle={{ minWidth: '10rem' }}
+    paginator
+    rows={5}
+    rowsPerPageOptions={[5, 10, 25, 50]}
+    paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
+    currentPageReportTemplate="{first} to {last} of {totalRecords}"
+    paginatorLeft={paginatorLeft}
+    paginatorRight={paginatorRight}
+    scrollable
+    responsiveLayout="scroll"
+>
+    <Column sortable field="name" header="Name"  className="name-column" />
+    <Column sortable field="type" header="Type"  className="type-column" />
+    <Column sortable field="appointmentId" header="Appointment" className="appointment-column" />
+    <Column sortable field="status" header="Status" className="status-column" />
+    <Column
+        field="representative.name"
         header="Action"
-        style={{ width: "15%" }} 
+     
+        className="action-column"
         body={(rowData) => (
-          <Button label="View" className="bgColor" onClick={() => handleView(rowData)} />
+            <Button label="View" className="bgColor" onClick={() => handleView(rowData)} />
         )}
-      />
-    </DataTable>
-  </div>
-</div>
+    />
+</DataTable>
+
+
+
+      </div>
+    </div>
 
     </div>
   );
