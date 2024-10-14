@@ -1,4 +1,3 @@
-// src/pages/Login.tsx
 import { useState } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
@@ -10,13 +9,25 @@ import logo from '../../assets/onlyicon.png';
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
 
+    const validateForm = () => {
+        if (!username || !password) {
+            setErrorMessage('Both username and password are required.');
+            return false;
+        }
+        return true;
+    };
+
     const handleLogin = () => {
+        if (!validateForm()) return;
+
         if (username === dummyUser.username && password === dummyUser.password) {
+            setErrorMessage(''); // Clear error message on successful login
             navigate('/home');
         } else {
-            alert('Invalid credentials');
+            setErrorMessage('Invalid username or password.');
         }
     };
 
@@ -35,6 +46,7 @@ const Login = () => {
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         placeholder="Username"
+                        className={errorMessage && !username ? 'input-error' : ''}
                     />
                 </div>
 
@@ -45,9 +57,10 @@ const Login = () => {
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="Password"
                         type="password"
+                        className={errorMessage && !password ? 'input-error' : ''}
                     />
                 </div>
-
+                {errorMessage && <div className="error-message">{errorMessage}</div>}
                 <Button label="Login" onClick={handleLogin} className="login-button" />
 
                 <div className="signup-link">
