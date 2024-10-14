@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { InputText } from 'primereact/inputtext';
-import logo from '../../assets/onlyicon.png';
+import logo from '../../assets/applogo1.png';
 import { Button } from 'primereact/button';
 import { useNavigate } from 'react-router-dom';
 import './checkin.scss';
