@@ -4,7 +4,7 @@ import { Button } from 'primereact/button';
 import { useNavigate } from 'react-router-dom';
 import { dummyUser } from '../../mock/data';
 import './login.scss';
-import logo from '../../assets/onlyicon.png';
+import logo from '../../assets/applogo1.png';
 
 const Login = () => {
     const [username, setUsername] = useState('');
