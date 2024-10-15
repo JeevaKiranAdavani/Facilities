@@ -7,6 +7,7 @@ import Layout from '../components/layout/layout';
 import ViewCheck_in from '../pages/viewCheck_in/viewCheck_in';
 import CheckInDetail from '../pages/check-in-detail/checkInDetail';
 import Supervisor from '../pages/supervisor/supervisor';
+import SealVerification from '../pages/supervisor/seal-verification/sealVerification';
 // import AuthGuard from '../guards/authguard';
 
 const Routing = () => {
@@ -22,6 +23,7 @@ const Routing = () => {
         <Route path="/home/view-checkins" element={<ViewCheck_in />} />
         <Route path="/home/check-in-detail/:appointmentId" element={<CheckInDetail />} />
         <Route path="/home/supervisor" element={<Supervisor />} />
+        <Route path="/home/supervisor/sealVerification" element={<SealVerification />} />
       </Route>
     </Routes>
     );
