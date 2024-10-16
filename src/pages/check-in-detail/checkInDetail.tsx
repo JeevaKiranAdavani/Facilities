@@ -219,10 +219,6 @@ export default function CheckInDetail() {
       </div>
 
       <Dialog header="Waitng Slot Allocation" visible={showDialog} style={{ width: '50vw' }} onHide={() => { if (!showDialog) return; setVisible(false); }}>
-        <p className="m-0">
-          {/* Dynamic waiting slot allocation */}
-        </p>
-        {/* Horizontal Layout for Chips with space between them */}
         <div className="flex flex-wrap gap-4 justify-center p-4">
           {availableSlots.length > 0 ? (
             availableSlots.map((slot) => (
@@ -239,7 +235,6 @@ export default function CheckInDetail() {
             <p className="text-center">No available slots.</p>
           )}
         </div>
-        {/* Optionally, you can add footer buttons (Confirm, Cancel) */}
         <div className="text-right mt-4">
           <Button label="Confirm" className="p-button-sm p-button-success mr-2" onClick={() => setVisible(false)} />
           <Button label="Cancel" className="p-button-sm p-button-secondary" onClick={() => setVisible(false)} />
