@@ -161,4 +161,23 @@
       opacity: 1;
     }
   }
+
+  .custom-scrollbar {
+    height: 500px;
+    overflow: auto;
+  
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
+  
+    &::-webkit-scrollbar-track {
+      background-color: #f1f1f1;
+    }
+  
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, 0.45);
+      border-radius: 10px;
+    }
+  }
+  
   
