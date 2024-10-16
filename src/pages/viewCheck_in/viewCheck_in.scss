@@ -1,25 +1,14 @@
+/* Hide columns on mobile */
 @media (max-width: 768px) {
-    .p-datatable .p-datatable-tbody > tr > td {
-        display: block;
-        width: 100%;
+    .hide-on-mobile {
+      display: none !important;
     }
-    .p-datatable .p-datatable-header, 
-    .p-datatable .p-datatable-footer {
-        display: none; 
+  }
+  
+  /* Hide columns on tablet */
+  @media (max-width: 1024px) {
+    .hide-on-tablet {
+      display: none !important;
     }
-    .p-datatable .p-datatable-thead > tr > th {
-        display: none; 
-    }
-}
-
-@media (max-width: 1024px) {
-    .p-datatable-wrapper {
-        overflow-x: auto; 
-    }
-}
-
-@media (min-width: 768px) and (max-width: 1024px) {
-    .p-datatable .p-datatable-tbody > tr > td {
-        min-width: 150px;
-    }
-}
+  }
+  
