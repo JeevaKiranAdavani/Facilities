@@ -61,12 +61,12 @@ const Layout = () => {
                     <div className="header-user">
                         <span className="username">{loggedInUser.name}</span>
                         <Avatar image={loggedInUser.avatar} size="large" shape="circle" className="avatar" />
-                        <Link to="/logout" className="logout-button">
+                        <Link to="/login" className="logout-button">
                             <i className="pi pi-sign-out"></i>
                         </Link>
                     </div>
                 </header>
-                <div className="layout-content">
+                <div className="layout-content custom-scrollbar ">
                     <Outlet />
                 </div>
             </div>

@@ -22,7 +22,7 @@ export const Orders = {
     },
 
     getCustomersSmall() {
-        return Promise.resolve(this.getData().slice(0, 10));
+        return Promise.resolve(this.getData().slice(0, 5));
     },
 
     getCustomersMedium() {
