@@ -1,0 +1,70 @@
+.appointment-container {
+    padding: 20px;
+    background-color: #f8f9fa;
+
+    .top-bar {
+        margin-bottom: 20px;
+        button {
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+        }
+    }
+
+    h2 {
+        margin-bottom: 20px;
+        font-size: 1.8rem;
+        color: #333;
+    }
+
+    /* Flexbox layout for forms */
+    .forms-container {
+        display: flex; /* Enable horizontal alignment */
+        gap: 20px; /* Space between forms */
+        justify-content: space-between; /* Adjusts the spacing */
+        flex-wrap: wrap; /* Allows wrapping in case of small screens */
+    }
+
+    .form-section {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        width: 30%; /* Ensures three forms take up 30% width each */
+
+        h3 {
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            color: #4a4a4a;
+        }
+
+        .p-field {
+            margin-bottom: 15px;
+
+            label {
+                font-weight: bold;
+                display: block;
+                margin-bottom: 5px;
+                font-size: 0.9rem;
+                color: #6c757d;
+            }
+
+            input, .p-inputtext {
+                width: 100%;
+                padding: 0.5rem;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                font-size: 1rem;
+            }
+        }
+    }
+
+    .form-submit {
+        text-align: center;
+        margin-top: 20px;
+        margin-left: 600px;
+        button {
+            padding: 0.75rem 2rem;
+            font-size: 1rem;
+        }
+    }
+}
