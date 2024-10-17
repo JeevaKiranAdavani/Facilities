@@ -10,7 +10,10 @@ import { DropdownChangeEvent } from "primereact/dropdown";
 import { Dialog } from "primereact/dialog";
 import { Chip } from "primereact/chip";
 import { Button } from "primereact/button";
+import { Tag } from "primereact/tag";
 
+import { Tooltip } from 'primereact/tooltip';
+        
 interface City {
   name: string;
   code: string;
@@ -125,21 +128,21 @@ export default function CheckInDetail() {
     { id: 3, slotNumber: 'B1' },
     { id: 4, slotNumber: 'B2' },
     { id: 5, slotNumber: 'C1' },
-    { id: 6, slotNumber: 'A1' },
-    { id: 7, slotNumber: 'A2' },
+    { id: 6, slotNumber: 'A2' },
+    { id: 7, slotNumber: 'A3' },
     { id: 8, slotNumber: 'B1' },
-    { id: 88, slotNumber: 'B2' },
-    { id: 45, slotNumber: 'C1' },
-    { id: 13, slotNumber: 'A1' },
-    { id: 244, slotNumber: 'A2' },
-    { id: 33, slotNumber: 'B1' },
-    { id: 445, slotNumber: 'B2' },
-    { id: 52, slotNumber: 'C1' },
-    { id: 133, slotNumber: 'A1' },
-    { id: 222, slotNumber: 'A2' },
-    { id: 313, slotNumber: 'B1' },
-    { id: 4434, slotNumber: 'B2' },
-    { id: 54, slotNumber: 'C1' },
+    { id: 88, slotNumber: 'B5' },
+    { id: 45, slotNumber: 'C6' },
+    { id: 13, slotNumber: 'A7' },
+    { id: 244, slotNumber: 'A7' },
+    { id: 33, slotNumber: 'B8' },
+    { id: 445, slotNumber: 'B52' },
+    { id: 52, slotNumber: 'C14' },
+    { id: 133, slotNumber: 'A13' },
+    { id: 222, slotNumber: 'A23' },
+    { id: 313, slotNumber: 'B12' },
+    { id: 4434, slotNumber: 'B22' },
+    { id: 54, slotNumber: 'C11' },
     // Add more slots dynamically as needed
   ];
   const [driverInfo, setDriverInfo] = useState<DriverInfo>({
@@ -151,6 +154,7 @@ export default function CheckInDetail() {
   });
 
   const [showDialog, setVisible] = useState(false);
+  const [showDockingDialog, setDockingVisible] = useState(false);
   const [selectedSlot, setSelectedSlot] = useState(null);  // To track the selected chip
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -166,6 +170,9 @@ export default function CheckInDetail() {
     if (statusOptions?.name === 'Waiting') {
       setVisible(true)
     }
+    if (statusOptions?.name === 'Loading' || statusOptions?.name === 'Unloading') {
+      setDockingVisible(true)
+    }
   }
   // Handle click on a chip (highlight it)
   const handleChipClick = (slot: any) => {
@@ -174,8 +181,25 @@ export default function CheckInDetail() {
 
   return (
     <>
+      <div className="grid p-2">
+        <div className="col-8">
+          <div className="border-round-sm font-bold align-items-center">
+
+            <Button icon="pi pi-angle-left" tooltip="Back" outlined severity="secondary" aria-label="Bookmark" size="small" className="mr-4" />
+            <span className="text-2xl mr-4">Check-In <span className="textcolor">#AMC890</span></span>
+            <Tag value="&nbsp;Inbound&nbsp;" rounded severity="danger" className="mr-4"></Tag>
+            <Button icon="pi pi-refresh" tooltip="Refresh" rounded text severity="secondary" aria-label="Bookmark" size="small" className="mr-4" />
+          </div>
+        </div>
+        <div className="col-4">
+          <div className="text-right border-round-sm  font-bold">
+          <Button label="Cancel" className="p-button-sm p-button-secondary mr-2"   />
+          <Button label="Save" className="p-button-sm" severity="info" />
+          </div>
+        </div>
+      </div>
       <div className="grid-wrapper">
-        <div className="grid-item grid-item-1">
+        <div className="grid-item grid-item-1 checkInInfo">
           <div className="displayFlex-wrapper">
             <div>
               <h4>Driver Information</h4>
@@ -231,9 +255,9 @@ export default function CheckInDetail() {
           </div>
         </div>
 
-        <div className="grid-item grid-item-3 h-[20rem] overflow-y-scroll">
-          <b>Check-In Status</b>
-          <div className="timeline-card mt-4">
+        <div className="grid-item grid-item-3 ">
+          <b >Check-In Status</b>
+          <div className="timeline-card mt-4 checkInStatus">
             {/* <Timeline value={events} content={(item) => item.status} /> */}
             <Timeline value={events} opposite={(item) => item.status}
               content={(item) => <small className="text-color-secondary">{item.date}</small>} />
@@ -255,7 +279,7 @@ export default function CheckInDetail() {
               <h4>&nbsp;</h4>
               <div>
                 <b>Customer</b>
-                <p><b>Name:</b> BUCHI KOMBUCHA</p>
+                <p><b>Name:</b> JOSEPH GARMET</p>
                 <p><b>Status:</b> AP DOWNLOAD-CMPLT</p>
 
               </div>
@@ -271,18 +295,30 @@ export default function CheckInDetail() {
         </div>
       </div>
 
-      <Dialog header="Waitng Slot Allocation" visible={showDialog} style={{ width: '50vw' }} onHide={() => { if (!showDialog) return; setVisible(false); }}>
+      <Dialog header="Parking Slot Allocation" visible={showDialog} style={{ width: '50vw' }} onHide={() => { if (!showDialog) return; setVisible(false); }}>
         <div className="flex flex-wrap gap-4 justify-center p-4">
           {availableSlots.length > 0 ? (
             availableSlots.map((slot) => (
-              <Chip
+              // <Chip
+              //   key={slot.id}
+              //   label={`Slot: ${slot.slotNumber}`}
+              //   className={`cursor-pointer p-chip-success transition-all duration-300 
+              //                               ${selectedSlot === slot.id ? 'bg-blue-700 text-white' : 'hover:bg-gradient-to-r hover:from-blue-400 hover:to-blue-400'}
+              //                               ${selectedSlot === slot.id ? '' : 'text-black'}`}
+              //   onClick={() => handleChipClick(slot)}
+              // />
+
+              <div
                 key={slot.id}
-                label={`Slot: ${slot.slotNumber}`}
-                className={`cursor-pointer p-chip-success transition-all duration-300 
-                                            ${selectedSlot === slot.id ? 'bg-blue-700 text-white' : 'hover:bg-gradient-to-r hover:from-blue-400 hover:to-blue-400'}
-                                            ${selectedSlot === slot.id ? '' : 'text-black'}`}
+                className={`cursor-pointer px-2 py-2 shadow-md transition-all duration-300 rounded-2xl
+                          ${selectedSlot === slot.id ? 'bg-blue-700 text-white border border-blue-800 rounded-2xl' : 'bg-gray-300 hover:bg-gradient-to-r hover:from-blue-400 hover:to-blue-400 border border-gray-400 rounded-2xl'}
+                          ${selectedSlot === slot.id ? 'text-white' : 'text-black'}`}
                 onClick={() => handleChipClick(slot)}
-              />
+              >
+                <span>
+                  Slot: <span className="font-bold">{slot.slotNumber}</span>
+                </span>
+              </div>
             ))
           ) : (
             <p className="text-center">No available slots.</p>
@@ -291,6 +327,41 @@ export default function CheckInDetail() {
         <div className="text-right mt-4">
           <Button label="Confirm" className="p-button-sm p-button-success mr-2" onClick={() => setVisible(false)} />
           <Button label="Cancel" className="p-button-sm p-button-secondary" onClick={() => setVisible(false)} />
+        </div>
+      </Dialog>
+      
+      <Dialog header="Docking Gate Allocation" visible={showDockingDialog} style={{ width: '50vw' }} onHide={() => { if (!showDockingDialog) return; setDockingVisible(false); }}>
+        <div className="flex flex-wrap gap-4 justify-center p-4">
+          {availableSlots.length > 0 ? (
+            availableSlots.map((slot) => (
+              // <Chip
+              //   key={slot.id}
+              //   label={`Slot: ${slot.slotNumber}`}
+              //   className={`cursor-pointer p-chip-success transition-all duration-300 
+              //                               ${selectedSlot === slot.id ? 'bg-blue-700 text-white' : 'hover:bg-gradient-to-r hover:from-blue-400 hover:to-blue-400'}
+              //                               ${selectedSlot === slot.id ? '' : 'text-black'}`}
+              //   onClick={() => handleChipClick(slot)}
+              // />
+
+              <div
+                key={slot.id}
+                className={`cursor-pointer px-2 py-2 shadow-md transition-all duration-300 rounded-2xl
+                          ${selectedSlot === slot.id ? 'bg-blue-700 text-white border border-blue-800 rounded-2xl' : 'bg-gray-300 hover:bg-gradient-to-r hover:from-blue-400 hover:to-blue-400 border border-gray-400 rounded-2xl'}
+                          ${selectedSlot === slot.id ? 'text-white' : 'text-black'}`}
+                onClick={() => handleChipClick(slot)}
+              >
+                <span>
+                  Gate: <span className="font-bold">{slot.slotNumber}</span>
+                </span>
+              </div>
+            ))
+          ) : (
+            <p className="text-center">No available slots.</p>
+          )}
+        </div>
+        <div className="text-right mt-4">
+          <Button label="Confirm" className="p-button-sm p-button-success mr-2" onClick={() => setDockingVisible(false)} />
+          <Button label="Cancel" className="p-button-sm p-button-secondary" onClick={() => setDockingVisible(false)} />
         </div>
       </Dialog>
     </>

@@ -29,6 +29,7 @@ export default function Supervisor() {
               value={supervisor_data}
               paginator
               rows={5}
+              showGridlines
               rowsPerPageOptions={[5, 10, 25, 50]}
               paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
               currentPageReportTemplate="{first} to {last} of {totalRecords}"
@@ -40,9 +41,9 @@ export default function Supervisor() {
             >
               <Column field="name" header="Driver Name"></Column>
               <Column field="type" header="Type"></Column>
-              <Column field="sealId" header="#Seal"></Column>
+              <Column field="sealId" header="Seal #"></Column>
               <Column field="status" header="Status"></Column>
-              <Column field="appointmentId" header="Appointment"></Column>
+              <Column field="appointmentId" header="Appointment #"></Column>
               <Column
                 field="representative.name"
                 header="Action"

@@ -8,7 +8,7 @@ import sealImage from '../../../assets/seal.jpg'
 export default function SealVerification() {
     const [sealverification, setSealverification] = useState(true)
     useEffect(() => {
-        setSealverification(true);
+        setSealverification(false);
     }, [])
     return (
         <>
