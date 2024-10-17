@@ -1,0 +1,27 @@
+.driver-status-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.custom-card {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.table-card {
+    width: 100%; // Make sure the card takes up full width of the container
+    margin-top: 20px;
+
+    .table-card-content {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Optional shadow for the card
+    }
+
+    .table-container {
+        margin-top: 20px;
+        width: 100%;
+    }
+}
