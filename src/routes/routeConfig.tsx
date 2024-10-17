@@ -6,6 +6,7 @@ import ViewCheckIn from '../pages/viewCheck_in/viewCheck_in';
 import CheckInDetail from '../pages/check-in-detail/checkInDetail';
 import DriverStatus from '../pages/driver_status/driver_status';
 import Unauthorized from '../pages/unauthorized/unauthorized';
+import Appointment from '../pages/appointment/appointment';
 
 const routeConfig = [
     {
@@ -39,6 +40,13 @@ const routeConfig = [
     {
       path: "/home/view-checkins",
       element: <ViewCheckIn />,
+      isProtected: true,
+      allowedRoles: ["Driver","Manager"],
+      useLayout: true,
+    },
+    {
+      path: "/home/appointment",
+      element: <Appointment />,
       isProtected: true,
       allowedRoles: ["Driver","Manager"],
       useLayout: true,

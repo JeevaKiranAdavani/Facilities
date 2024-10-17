@@ -16,7 +16,7 @@ const Layout = () => {
 
     const menuItems = [
         { label: 'Dashboard', icon: 'pi pi-home', to: '/home' },
-        { label: 'Appointment', icon: 'pi pi-qrcode', to: '/home' },
+        { label: 'Appointment', icon: 'pi pi-qrcode', to: '/home/appointment' },
         { label: 'Settings', icon: 'pi pi-cog', to: '/home' },
         { label: 'Warehouse', icon: 'pi pi-shop', to: '/home/supervisor' },
         { label: 'Driver Status', icon: 'pi pi-truck', to: '/home/driverStatus' }
