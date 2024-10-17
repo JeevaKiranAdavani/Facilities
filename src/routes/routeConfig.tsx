@@ -6,6 +6,8 @@ import ViewCheckIn from '../pages/viewCheck_in/viewCheck_in';
 import CheckInDetail from '../pages/check-in-detail/checkInDetail';
 import DriverStatus from '../pages/driver_status/driver_status';
 import Unauthorized from '../pages/unauthorized/unauthorized';
+import Supervisor from '../pages/supervisor/supervisor';
+import SealVerification from '../pages/supervisor/seal-verification/sealVerification';
 
 const routeConfig = [
     {
@@ -40,7 +42,7 @@ const routeConfig = [
       path: "/home/view-checkins",
       element: <ViewCheckIn />,
       isProtected: true,
-      allowedRoles: ["Driver","Manager"],
+      allowedRoles: ["Manager"],
       useLayout: true,
     },
     {
@@ -55,6 +57,20 @@ const routeConfig = [
       element: <DriverStatus />,
       isProtected: true,
       allowedRoles: ["Driver","Manager"],
+      useLayout: true,
+    },
+    {
+      path: "/home/supervisor",
+      element: <Supervisor />,
+      isProtected: true,
+      allowedRoles: ["Manager","Warehouse Supervisor"],
+      useLayout: true,
+    },
+    {
+      path: "/home/supervisor/sealVerification",
+      element: <SealVerification/>,
+      isProtected: true,
+      allowedRoles: ["Warehouse Supervisor","Manager"],
       useLayout: true,
     },
     {

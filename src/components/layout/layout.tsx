@@ -1,36 +1,55 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Outlet, Link } from 'react-router-dom';
 import { Button } from 'primereact/button';
 import { Avatar } from 'primereact/avatar';
 import logo from '../../assets/onlyicon.png';
 import './layout.scss';
 
+const allMenuItems = [
+    { label: 'Dashboard', icon: 'pi pi-home', to: '/home' },
+    { label: 'Appointment', icon: 'pi pi-qrcode', to: '/home' },
+    { label: 'Seal Details', icon: 'pi pi-lock', to: '/home/supervisor' },
+    { label: 'Driver Dashboard', icon: 'pi pi-truck', to: '/home/driverStatus' },
+];
+
 const Layout = () => {
     const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
     const [activePage, setActivePage] = useState('Dashboard');
+    const [menuItems, setMenuItems] = useState([]);
+    
+    const userRole = localStorage.getItem('userRole');
 
     const loggedInUser = {
         name: 'User',
-        avatar: 'https://images.miraclesoft.com/employee-profile-pics/kvedantam.png'
+        avatar: 'https://images.miraclesoft.com/employee-profile-pics/ndangeti.png'
     };
 
-    const menuItems = [
-        { label: 'Dashboard', icon: 'pi pi-home', to: '/home' },
-        { label: 'Appointment', icon: 'pi pi-qrcode', to: '/home' },
-        { label: 'Settings', icon: 'pi pi-cog', to: '/home' },
-        { label: 'Warehouse', icon: 'pi pi-shop', to: '/home/supervisor' },
-        { label: 'Driver Status', icon: 'pi pi-truck', to: '/home/driverStatus' }
-    ];
+  
+    useEffect(() => {
+        let filteredMenuItems : any;
+        
+        if (userRole === 'Driver') {
+            filteredMenuItems = allMenuItems.filter(item => item.label === 'Driver Dashboard');
+        } else if (userRole === 'Manager') {
+            filteredMenuItems = allMenuItems.filter(item => item.label !== 'Driver Dashboard');
+        } else if (userRole === 'Supervisor') {
+            filteredMenuItems = allMenuItems.filter(item => item.label === 'Seal Details');
+        } else {
+            filteredMenuItems = allMenuItems;
+        }
+        
+        setMenuItems(filteredMenuItems);
+    }, [userRole]);
 
     const handleMenuClick = (label: string) => {
         setActivePage(label);
     };
 
     const handleLogout = () => {
-        alert('loggingout')
+        alert('logging out');
         localStorage.removeItem('jwtToken');
         localStorage.removeItem('userRole');
-    }
+    };
 
     return (
         <div className="layout-wrapper">
@@ -44,7 +63,7 @@ const Layout = () => {
                 </div>
 
                 <div className="sidebar-menu">
-                    {menuItems.map((item, index) => (
+                    {menuItems.map((item:any, index) => (
                         <Link 
                             to={item.to} 
                             key={index} 
@@ -63,7 +82,7 @@ const Layout = () => {
             </aside>
 
             <div className="layout-main">
-                <header className="layout-header" >
+                <header className="layout-header">
                     <h1 className="header-title animated-text">{activePage}</h1>
                     <div className="header-user">
                         <span className="username">{loggedInUser.name}</span>
@@ -73,7 +92,7 @@ const Layout = () => {
                         </Link>
                     </div>
                 </header>
-                <div className="layout-content custom-scrollbar ">
+                <div className="layout-content custom-scrollbar">
                     <Outlet />
                 </div>
             </div>
