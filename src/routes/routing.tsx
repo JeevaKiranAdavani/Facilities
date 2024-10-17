@@ -1,28 +1,66 @@
-import { Routes, Route ,Navigate } from 'react-router-dom';
-import Home from '../pages/home/home';
-import Login from '../pages/login/login';
-import SignUp from '../pages/registration/registration';
-import CheckIn from '../pages/checkin/checkin';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Layout from '../components/layout/layout';
-import ViewCheck_in from '../pages/viewCheck_in/viewCheck_in';
-import CheckInDetail from '../pages/check-in-detail/checkInDetail';
-// import AuthGuard from '../guards/authguard';
+import AuthGuard from '../guards/authguard';
+import NotFound from '../pages/notFound/notfound';
+import routeConfig from './routeConfig';
 
 const Routing = () => {
-    return (
-        <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/" element={<Navigate to="/login" />} />
-        <Route path='/signup' element={<SignUp />} />
-        <Route path='/checkin' element={<CheckIn />}/>
-        
-        <Route element={<Layout />}>
-        <Route path="/home" element={<Home />} />
-        <Route path="/home/view-checkins" element={<ViewCheck_in />} />
-        <Route path="/home/check-in-detail/:appointmentId" element={<CheckInDetail />} />
-      </Route>
+  return (
+    <Routes>
+      {routeConfig.map((route) => {
+        const routeElement = route.isProtected ? (
+          <AuthGuard allowedRoles={route.allowedRoles}>{route.element}</AuthGuard>
+        ) : (
+          route.element
+        );
+
+        return route.useLayout ? (
+          <Route
+            key={route.path}
+            element={<Layout />}
+          >
+            <Route path={route.path} element={routeElement} />
+          </Route>
+        ) : (
+          <Route key={route.path} path={route.path} element={routeElement} />
+        );
+      })}
+      <Route path="/" element={<Navigate to="/login" />} />
+
+      <Route path="*" element={<NotFound />} />
     </Routes>
-    );
+  );
 };
 
 export default Routing;
+
+
+// import { Routes, Route, Navigate } from 'react-router-dom';
+// import Layout from '../components/layout/layout';
+// import NotFound from '../pages/notFound/notfound';
+// import routeConfig from './routeConfig';
+
+// const Routing = () => {
+//   return (
+//     <Routes>
+//       {routeConfig.map((route) => {
+//         const routeElement = route.element;
+
+//         return route.useLayout ? (
+//           <Route
+//             key={route.path}
+//             element={<Layout />}
+//           >
+//             <Route path={route.path} element={routeElement} />
+//           </Route>
+//         ) : (
+//           <Route key={route.path} path={route.path} element={routeElement} />
+//         );
+//       })}
+//       <Route path="/" element={<Navigate to="/login" />} />
+//       <Route path="*" element={<NotFound />} />
+//     </Routes>
+//   );
+// };
+
+// export default Routing;

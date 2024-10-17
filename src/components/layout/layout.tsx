@@ -6,7 +6,7 @@ import logo from '../../assets/onlyicon.png';
 import './layout.scss';
 
 const Layout = () => {
-    const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true);
+    const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
     const [activePage, setActivePage] = useState('Dashboard');
 
     const loggedInUser = {
@@ -24,6 +24,12 @@ const Layout = () => {
     const handleMenuClick = (label: string) => {
         setActivePage(label);
     };
+
+    const handleLogout = () => {
+        alert('loggingout')
+        localStorage.removeItem('jwtToken');
+        localStorage.removeItem('userRole');
+    }
 
     return (
         <div className="layout-wrapper">
@@ -61,7 +67,7 @@ const Layout = () => {
                     <div className="header-user">
                         <span className="username">{loggedInUser.name}</span>
                         <Avatar image={loggedInUser.avatar} size="large" shape="circle" className="avatar" />
-                        <Link to="/login" className="logout-button">
+                        <Link to="/login" onClick={handleLogout} className="logout-button">
                             <i className="pi pi-sign-out"></i>
                         </Link>
                     </div>

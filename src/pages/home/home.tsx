@@ -235,14 +235,14 @@ const Home: React.FC = () => {
       </div>
       <div className="card">
         <div className="grid">
-          <div className="col-12 md:col-6">
+          <div className="col-12 md:col-6 sm:col-12">
             <Fieldset legend="Status Chart">
               <div style={{ position: 'relative', height: '400px' }}>
                 <Chart type="line" data={chartData} options={chartOptions} />
               </div>
             </Fieldset>
           </div>
-          <div className="col-12 md:col-6">
+          <div className="col-12 md:col-6 sm:col-12">
             <Fieldset legend="Recent Check-In's">
               <div className="card">
                 <DataTable value={topFiveCustomers}>
@@ -282,10 +282,10 @@ const Home: React.FC = () => {
                       }
                     }}
                   />
-                  <Column field="name" header="Name" sortable />
-                  <Column field="type" header="Type" sortable />
-                  <Column field="appointmentId" header="Appointment ID" sortable />
-                  <Column field="status" header="Status" sortable />
+                  <Column field="name" header="Name"  />
+                  <Column field="type" header="Type"  />
+                  <Column field="appointmentId" header="Appointment ID"  />
+                  <Column field="status" header="Status" />
                   {/* <Column body={(rowData) =>
                     <Button icon="pi pi-user" rounded className='bgColor'  onClick={() => handleView(rowData)} />} /> */}
                 </DataTable>
