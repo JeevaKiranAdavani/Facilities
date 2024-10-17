@@ -1,9 +1,18 @@
-import { Navigate, Outlet } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+interface AuthGuardProps {
+  children: JSX.Element;
+  allowedRoles: string[];
+}
 
-const AuthGuard = () => {
-    const isAuthenticated = false; 
+const AuthGuard = ({ children, allowedRoles }: AuthGuardProps) => {
+  const userRole = localStorage.getItem('userRole');
 
-    return isAuthenticated ? <Outlet /> : <Navigate to="/" />;
+  if (!userRole || !allowedRoles.includes(userRole)) {
+    return <Navigate to="/unauthorized" replace />;
+  }
+
+  return children;
 };
 
 export default AuthGuard;
+

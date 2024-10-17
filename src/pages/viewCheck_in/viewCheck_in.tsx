@@ -40,7 +40,7 @@ interface Customer {
   balance: number;
 }
 
-export default function ViewCheck_in() {
+export default function ViewCheckIn() {
   const [customers, setCustomers] = useState<Customer[]>([]);
   const [filters, setFilters] = useState<DataTableFilterMeta>({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },

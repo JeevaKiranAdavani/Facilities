@@ -26,6 +26,11 @@ const Registration = () => {
         return Object.keys(newErrors).length === 0;
     };
 
+    const handleLoginRedirect = () => {
+        navigate('/login');
+    };
+
+
     const handleSignup = () => {
         if (!validateForm()) return;
 
@@ -109,6 +114,10 @@ const Registration = () => {
 
                 {errors.licenseDocument && <small className="error-message">{errors.licenseDocument}</small>}
                 <Button label="Sign Up" onClick={handleSignup} className="signup-button" />
+
+                <div className="signup-link">
+                    <p>Back to<span onClick={handleLoginRedirect}> &nbsp;Login</span></p>
+                </div>
             </div>
         </div>
     );

@@ -26,6 +26,7 @@
         text-align: center;
         margin-bottom: 2rem;
         color: #333;
+        font-weight: 500;
     }
 
     .input-group {
@@ -93,6 +94,25 @@
 
         &:focus {
             outline: none;
+        }
+    }
+
+    .signup-link {
+        margin-top: 1rem;
+        text-align: center;
+        font-size: 0.9rem;
+        color: #555;
+
+        span {
+            color: #007ad9;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s;
+
+            &:hover {
+                color: #005ea6;
+            }
         }
     }
 
