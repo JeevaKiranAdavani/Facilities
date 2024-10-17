@@ -51,26 +51,69 @@ export default function CheckInDetail() {
   ];
   const events: TimelineEvent[] = [
     {
-      status: "Ordered",
+      status: "Truck Arrived",
       date: "15/10/2020 10:30",
       icon: "pi pi-shopping-cart",
       color: "#9C27B0",
       image: "game-controller.jpg",
     },
     {
-      status: "Processing",
+      status: "Driver Checked-In",
       date: "15/10/2020 14:00",
       icon: "pi pi-cog",
       color: "#673AB7",
     },
     {
-      status: "Shipped",
+      status: "Check-In Reviewed",
       date: "15/10/2020 16:15",
       icon: "pi pi-shopping-cart",
       color: "#FF9800",
     },
     {
-      status: "Delivered",
+      status: "Gate Open",
+      date: "16/10/2020 10:00",
+      icon: "pi pi-check",
+      color: "#607D8B",
+    },
+
+    {
+      status: "Truck Entered",
+      date: "16/10/2020 10:00",
+      icon: "pi pi-check",
+      color: "#607D8B",
+    },
+    {
+      status: "WAITING",
+      date: "16/10/2020 10:00",
+      icon: "pi pi-check",
+      color: "#607D8B",
+    },
+    {
+      status: "Docking Gate",
+      date: "16/10/2020 10:00",
+      icon: "pi pi-check",
+      color: "#607D8B",
+    },
+    {
+      status: "REQUEST DOCUMENTS",
+      date: "16/10/2020 10:00",
+      icon: "pi pi-check",
+      color: "#607D8B",
+    },
+    {
+      status: "DOCUMENTS UPLOADED",
+      date: "16/10/2020 10:00",
+      icon: "pi pi-check",
+      color: "#607D8B",
+    },
+    {
+      status: "DRIVER CONFIRMATION",
+      date: "16/10/2020 10:00",
+      icon: "pi pi-check",
+      color: "#607D8B",
+    },
+    {
+      status: "COMPLETED",
       date: "16/10/2020 10:00",
       icon: "pi pi-check",
       color: "#607D8B",
@@ -175,15 +218,25 @@ export default function CheckInDetail() {
                 className="w-full"
               />
             </div>
+
+            {/* <div className="card flex justify-content-center">
+              <Button
+              >
+                Discard
+              </Button>
+              <Button >
+                Save
+              </Button>
+            </div> */}
           </div>
         </div>
 
-        <div className="grid-item grid-item-3">
+        <div className="grid-item grid-item-3 h-[20rem] overflow-y-scroll">
           <b>Check-In Status</b>
           <div className="timeline-card mt-4">
             {/* <Timeline value={events} content={(item) => item.status} /> */}
-            <Timeline value={events} opposite={(item) => item.status} 
-    content={(item) => <small className="text-color-secondary">{item.date}</small>} />
+            <Timeline value={events} opposite={(item) => item.status}
+              content={(item) => <small className="text-color-secondary">{item.date}</small>} />
           </div>
         </div>
         {/* <div className="grid-item grid-item-4">Item 4</div> */}
