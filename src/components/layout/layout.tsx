@@ -18,7 +18,7 @@ const Layout = () => {
         { label: 'Dashboard', icon: 'pi pi-home', to: '/home' },
         { label: 'Appointment', icon: 'pi pi-qrcode', to: '/home' },
         { label: 'Settings', icon: 'pi pi-cog', to: '/home' },
-        { label: 'WareHouse', icon: 'pi pi-shop', to: '/home' },
+        { label: 'Warehouse', icon: 'pi pi-shop', to: '/home/supervisor' },
     ];
 
     const handleMenuClick = (label: string) => {
