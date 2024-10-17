@@ -1,70 +1,79 @@
 import React, { useState } from 'react';
 import { Outlet, Link } from 'react-router-dom';
-import { Menubar } from 'primereact/menubar';
 import { Button } from 'primereact/button';
-import { Card } from 'primereact/card';
+import { Avatar } from 'primereact/avatar';
 import logo from '../../assets/onlyicon.png';
 import './layout.scss';
 
-const Layout: React.FC = () => {
-    const [isCollapsed, setIsCollapsed] = useState(false);
+const Layout = () => {
+    const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+    const [activePage, setActivePage] = useState('Dashboard');
 
-    const sideNavItems = [
-        { label: 'Dashboard', icon: 'pi pi-chart-line', to: '/dashboard' },
-        { label: 'Reports', icon: 'pi pi-file', to: '/reports' },
-        { label: 'Analytics', icon: 'pi pi-chart-bar', to: '/analytics' },
-        { label: 'Messages', icon: 'pi pi-envelope', to: '/messages' }
+    const loggedInUser = {
+        name: 'User',
+        avatar: 'https://images.miraclesoft.com/employee-profile-pics/kvedantam.png'
+    };
+
+    const menuItems = [
+        { label: 'Dashboard', icon: 'pi pi-home', to: '/home' },
+        { label: 'Appointment', icon: 'pi pi-qrcode', to: '/home' },
+        { label: 'Settings', icon: 'pi pi-cog', to: '/home' },
+        { label: 'Warehouse', icon: 'pi pi-shop', to: '/home/supervisor' },
     ];
 
+    const handleMenuClick = (label: string) => {
+        setActivePage(label);
+    };
+
+    const handleLogout = () => {
+        alert('loggingout')
+        localStorage.removeItem('jwtToken');
+        localStorage.removeItem('userRole');
+    }
+
     return (
-        <div className={`layout-container ${isCollapsed ? 'collapsed' : ''}`}>
-            <Menubar
-                className="topnav"
-                model={[]}
-                start={
-                    <div className="topnav-left">
-                        <Button 
-                            icon="pi pi-bars" 
-                            rounded 
-                            text 
-                            aria-label="Toggle Sidebar" 
-                            onClick={() => setIsCollapsed(!isCollapsed)} 
-                        />
-                        <img src={logo} alt="Logo" className="app-logo" />
-                    </div>
-                }
-                end={
-                    <div className="topnav-right">
-                        <Button 
-                            icon="pi pi-sign-out" 
-                            rounded 
-                            text 
-                            aria-label="Logout" 
-                            className="topnav-item logout" 
-                            onClick={() => console.log('Logout clicked')} 
-                        />
-                    </div>
-                }
-            />
+        <div className="layout-wrapper">
+            <aside className={`layout-sidebar ${isSidebarCollapsed ? 'collapsed' : ''}`}>
+                <div className="sidebar-header">
+                    <Button 
+                        icon="pi pi-bars" 
+                        className="sidebar-toggle p-button-rounded p-button-text" 
+                        onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)} 
+                    />
+                </div>
 
-            <div className="layout-body">
-                <aside className={`layout-sidebar ${isCollapsed ? 'collapsed' : ''}`}>
-                    <ul className="sidebar-menu">
-                        {sideNavItems.map((item, index) => (
-                            <li key={index} className="sidebar-item">
-                                <Link to={item.to} className="sidebar-link">
-                                    <i className={item.icon}></i>
-                                    {!isCollapsed && <span className="sidebar-label">{item.label}</span>}
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
-                </aside>
+                <div className="sidebar-menu">
+                    {menuItems.map((item, index) => (
+                        <Link 
+                            to={item.to} 
+                            key={index} 
+                            className="sidebar-item" 
+                            onClick={() => handleMenuClick(item.label)}
+                        >
+                            <i className={item.icon}></i>
+                            {!isSidebarCollapsed && <span>{item.label}</span>}
+                        </Link>
+                    ))}
+                </div>
 
-                <div className="layout-content">
-                    <Card className="custom-card">
-                        <Outlet />
-                    </Card>
+                <div className="sidebar-footer">
+                    <img src={logo} alt="Company Logo" className="sidebar-logo" />
+                </div>
+            </aside>
+
+            <div className="layout-main">
+                <header className="layout-header" >
+                    <h1 className="header-title animated-text">{activePage}</h1>
+                    <div className="header-user">
+                        <span className="username">{loggedInUser.name}</span>
+                        <Avatar image={loggedInUser.avatar} size="large" shape="circle" className="avatar" />
+                        <Link to="/login" onClick={handleLogout} className="logout-button">
+                            <i className="pi pi-sign-out"></i>
+                        </Link>
+                    </div>
+                </header>
+                <div className="layout-content custom-scrollbar ">
+                    <Outlet />
                 </div>
             </div>
         </div>

@@ -1,0 +1,159 @@
+.grid-wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  grid-template-rows: repeat(1, 150px); 
+  gap: 2rem;
+  background: #f0f0f0; 
+}
+.grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  grid-template-rows: repeat(1, 150px); 
+  background: #f0f0f0; 
+}
+.grid-item {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+}
+
+
+.grid-item-1 {
+  grid-column: 1 / span 2;
+  grid-row: 1 / 3;
+}
+
+.grid-item-3 {
+  grid-column: 3 / 4;
+  grid-row: 2 / 4;
+}
+.textcolor {
+ color: #7e96a1
+}
+.grid-item-5 {
+  grid-column: 1 / 3;
+  grid-row: 3 / 5;
+}
+
+
+@media (max-width: 1024px) { 
+  .grid-wrapper {
+    grid-template-columns: repeat(2, 1fr); 
+    grid-template-rows: auto; 
+  }
+
+  .grid-item-1 {
+    grid-column: 1 / 3; 
+    grid-row: auto;
+  }
+
+  .grid-item-3 {
+    grid-column: 1 / 3;
+    grid-row: auto;
+  }
+
+  .grid-item-5 {
+    grid-column: 1 / 3;
+    grid-row: auto;
+  }
+}
+
+@media (max-width: 768px) { 
+  .grid-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .grid-item-1,
+  .grid-item-3,
+  .grid-item-5 {
+    grid-column: 1;
+  }
+}
+/* Flexbox wrapper for desktop view */
+.displayFlex-wrapper {
+  display: flex;
+  justify-content: space-around;
+  align-items: baseline;
+  gap: 2rem;
+}
+
+/* Styles for grid items */
+.grid-item {
+  padding: 1rem;
+  background-color: white;
+}
+
+/* Mobile: Switch to column layout */
+@media (max-width: 768px) {
+  .displayFlex-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  ul {
+    margin: 0.5rem 0;
+  }
+}
+
+/* Tablet: Adjust layout */
+@media (max-width: 1024px) {
+  .displayFlex-wrapper {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  ul {
+    margin: 0.7rem 0;
+  }
+}
+.AddInfo{
+  padding-left: 50px;
+}
+.small-card {
+  width: 300px; /* Smaller width */
+  padding: 1rem; /* Reduced padding */
+  margin: auto;  /* Center the card */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+@media (max-width: 1024px) {
+  .small-card {
+    width: 250px; /* Slightly smaller on tablets */
+    padding: 0.8rem;
+  }
+}
+
+/* Adjust card for mobile screens (≤ 768px) */
+@media (max-width: 768px) {
+  .small-card {
+    width: 90%; /* Take most of the screen width */
+    padding: 0.6rem;
+  }
+}
+
+
+.checkInStatus {
+  height: 20em;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+}
+
+.checkInInfo {
+  height: 15em;
+  padding-bottom: -2em;
+}
+.grid-item.grid-item-5 {
+  margin-top: -7rem;
+  height: 15em;
+}

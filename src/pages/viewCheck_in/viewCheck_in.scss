@@ -1,0 +1,14 @@
+/* Hide columns on mobile */
+@media (max-width: 768px) {
+    .hide-on-mobile {
+      display: none !important;
+    }
+  }
+  
+  /* Hide columns on tablet */
+  @media (max-width: 1024px) {
+    .hide-on-tablet {
+      display: none !important;
+    }
+  }
+  

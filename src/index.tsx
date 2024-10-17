@@ -6,10 +6,13 @@ import reportWebVitals from './reportWebVitals';
 import 'primereact/resources/themes/saga-blue/theme.css'; // Or any theme
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
-
+import 'primeflex/primeflex.css';
+import setupInterceptors from './interceptors/interceptor';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+setupInterceptors();
 root.render(
   <React.StrictMode>
     <App />
