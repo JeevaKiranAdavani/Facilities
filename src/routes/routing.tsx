@@ -3,12 +3,6 @@ import Layout from '../components/layout/layout';
 import AuthGuard from '../guards/authguard';
 import NotFound from '../pages/notFound/notfound';
 import routeConfig from './routeConfig';
-import ViewCheck_in from '../pages/viewCheck_in/viewCheck_in';
-import CheckInDetail from '../pages/check-in-detail/checkInDetail';
-import Supervisor from '../pages/supervisor/supervisor';
-import SealVerification from '../pages/supervisor/seal-verification/sealVerification';
-import Drvier_Staus from '../pages/driver_status/driver_status'
-// import AuthGuard from '../guards/authguard';
 
 const Routing = () => {
   return (

@@ -36,7 +36,11 @@ const Login = () => {
                 navigate('/home');
             } else if (response.role === 'Driver') {
                 navigate('/driver-dashboard');
-            } else {
+            } 
+            else if (response.role === 'Supervisor') {
+                navigate('/home/seal-details');
+            } 
+            else {
                 setApiError('Unauthorized access.');
             }
         } catch (err) {

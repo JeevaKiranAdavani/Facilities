@@ -1,4 +1,3 @@
-import { render } from "@testing-library/react";
 import { Button } from "primereact/button";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
@@ -17,7 +16,7 @@ export default function Supervisor() {
   }, []);
 
   const handleView = (rowData: any) => {
-      navigate("/home/supervisor/sealVerification")
+      navigate("/home/seal-details/sealVerification")
   };
 
   return (
@@ -28,7 +27,7 @@ export default function Supervisor() {
             <DataTable
               value={supervisor_data}
               paginator
-              rows={5}
+              rows={10}
               showGridlines
               rowsPerPageOptions={[5, 10, 25, 50]}
               paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
@@ -62,7 +61,7 @@ export default function Supervisor() {
             <DataTable
               value={supervisor_data}
               paginator
-              rows={5}
+              rows={10}
               rowsPerPageOptions={[5, 10, 25, 50]}
               paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
               currentPageReportTemplate="{first} to {last} of {totalRecords}"
