@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { FileUpload } from 'primereact/fileupload';
@@ -7,6 +7,9 @@ import { InputTextarea } from 'primereact/inputtextarea';
 import sealImage from '../../../assets/seal.jpg'
 export default function SealVerification() {
     const [sealverification, setSealverification] = useState(true)
+    useEffect(() => {
+        setSealverification(true);
+    }, [])
     return (
         <>
 

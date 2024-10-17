@@ -7,6 +7,9 @@ import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import { Timeline } from "primereact/timeline";
 import { DropdownChangeEvent } from "primereact/dropdown";
+import { Dialog } from "primereact/dialog";
+import { Chip } from "primereact/chip";
+import { Button } from "primereact/button";
 
 interface City {
   name: string;
@@ -36,13 +39,15 @@ interface CheckInStatus {
 }
 export default function CheckInDetail() {
   const { appointmentId } = useParams();
-  const [selectedCity, setSelectedCity] = useState<City | null>(null);
-  const cities: City[] = [
-    { name: "New York", code: "NY" },
-    { name: "Rome", code: "RM" },
-    { name: "London", code: "LDN" },
-    { name: "Istanbul", code: "IST" },
-    { name: "Paris", code: "PRS" },
+  const [statusOptions, setStatusOptions] = useState<City | null>(null);
+  const statusLookupData: City[] = [
+    { name: "Review Check-In", code: "review" },
+    { name: "Waiting", code: "waiting" },
+    { name: "Loading", code: "loading" },
+    { name: "Unloading", code: "unloading" },
+    { name: "Request Documents", code: "reqDocs" },
+    { name: "Request E-Signature", code: "reqESign" },
+    { name: "Completed", code: "Completed" },
   ];
   const events: TimelineEvent[] = [
     {
@@ -71,6 +76,29 @@ export default function CheckInDetail() {
       color: "#607D8B",
     },
   ];
+  const availableSlots = [
+    { id: 1, slotNumber: 'A1' },
+    { id: 2, slotNumber: 'A2' },
+    { id: 3, slotNumber: 'B1' },
+    { id: 4, slotNumber: 'B2' },
+    { id: 5, slotNumber: 'C1' },
+    { id: 6, slotNumber: 'A1' },
+    { id: 7, slotNumber: 'A2' },
+    { id: 8, slotNumber: 'B1' },
+    { id: 88, slotNumber: 'B2' },
+    { id: 45, slotNumber: 'C1' },
+    { id: 13, slotNumber: 'A1' },
+    { id: 244, slotNumber: 'A2' },
+    { id: 33, slotNumber: 'B1' },
+    { id: 445, slotNumber: 'B2' },
+    { id: 52, slotNumber: 'C1' },
+    { id: 133, slotNumber: 'A1' },
+    { id: 222, slotNumber: 'A2' },
+    { id: 313, slotNumber: 'B1' },
+    { id: 4434, slotNumber: 'B2' },
+    { id: 54, slotNumber: 'C1' },
+    // Add more slots dynamically as needed
+  ];
   const [driverInfo, setDriverInfo] = useState<DriverInfo>({
     name: "John Doe",
     phoneNumber: "123-456-7890",
@@ -79,8 +107,26 @@ export default function CheckInDetail() {
     isVaccinated: true,
   });
 
+  const [showDialog, setVisible] = useState(false);
+  const [selectedSlot, setSelectedSlot] = useState(null);  // To track the selected chip
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+  };
+  function statusChange(e: any) {
+    setStatusOptions(e)
+    if (e.name === 'Waiting') {
+      setVisible(true)
+    }
+  }
+  function statusChangeClick() {
+    if (statusOptions?.name === 'Waiting') {
+      setVisible(true)
+    }
+  }
+  // Handle click on a chip (highlight it)
+  const handleChipClick = (slot: any) => {
+    setSelectedSlot(slot.id);
   };
 
   return (
@@ -91,25 +137,25 @@ export default function CheckInDetail() {
             <div>
               <h4>Driver Information</h4>
               <div>
-                <p>Name: test</p>
-                <p>Phone: 2342342342</p>
-                <p>License: DL-2342342</p>
-                <p>Type: Inbound</p>
+                <p><b>Name:</b> test</p>
+                <p><b>Phone:</b> 2342342342</p>
+                <p><b>License:</b> DL-2342342</p>
+                <p><b>Type:</b> Inbound</p>
               </div>
             </div>
             <div>
               <h4>Appointment Information</h4>
               <div>
-                <p>Appt Id: AP-5020</p>
-                <p>Status: AP DOWNLOAD-CMPLT</p>
-                <p>Date: 05-08-2024 10:45</p>
-                <p>Load No:</p>
+                <p><b>Appt Id:</b> AP-5020</p>
+                <p><b>Status:</b> AP DOWNLOAD-CMPLT</p>
+                <p><b>Date:</b> 05-08-2024 10:45</p>
+                <p><b>Load No:</b></p>
               </div>
             </div>
             <div>
               <h4>Additional Information</h4>
               <div>
-                <p>Test: test</p>
+                <p><b>Test:</b> test</p>
               </div>
             </div>
           </div>
@@ -120,47 +166,80 @@ export default function CheckInDetail() {
             <h4>Status</h4>
             <div className="card flex justify-content-center">
               <Dropdown
-                value={selectedCity}
-                onChange={(e: DropdownChangeEvent) => setSelectedCity(e.value)}
-                options={cities}
+                value={statusOptions}
+                onChange={(e: DropdownChangeEvent) => statusChange(e.value)}
+                onHide={() => statusChangeClick()}
+                options={statusLookupData}
                 optionLabel="name"
-                placeholder="Select a City"
-                className="w-full md:w-14rem"
+                placeholder="Select Status"
+                className="w-full"
               />
             </div>
           </div>
         </div>
 
         <div className="grid-item grid-item-3">
-          <div className="timeline-card">
-            <Timeline value={events} content={(item) => item.status} />
-
+          <b>Check-In Status</b>
+          <div className="timeline-card mt-4">
+            {/* <Timeline value={events} content={(item) => item.status} /> */}
+            <Timeline value={events} opposite={(item) => item.status} 
+    content={(item) => <small className="text-color-secondary">{item.date}</small>} />
           </div>
         </div>
         {/* <div className="grid-item grid-item-4">Item 4</div> */}
         <div className="grid-item grid-item-5">
           <div className="displayFlex-wrapper">
-        <div>
+            <div>
               <h4>Trip Information</h4>
               <div>
-                <p>Name : Allentown PA</p>
-                <p>Id : 80502</p>
-                <p>ource System Code : ATL</p>
+                <b>Facility</b>
+                <p><b>Name:</b> Allentown PA</p>
+                <p><b>Id:</b> 80502</p>
+                <p><b>Source System Code:</b> ATL</p>
               </div>
             </div>
             <div>
-              <h4>Customer</h4>
+              <h4>&nbsp;</h4>
               <div>
-                <p>Name : BUCHI KOMBUCHA</p>
-                <p>Status: AP DOWNLOAD-CMPLT</p>
-              
+                <b>Customer</b>
+                <p><b>Name:</b> BUCHI KOMBUCHA</p>
+                <p><b>Status:</b> AP DOWNLOAD-CMPLT</p>
+
               </div>
             </div>
-            </div>
-         
+          </div>
+
         </div>
-        <div className="grid-item grid-item-6">Item 6</div>
+        <div className="grid-item grid-item-6">
+          <b>Trip Documents</b>
+          <div className="mt-4">
+            <img alt="j" src=""></img>
+          </div>
+        </div>
       </div>
+
+      <Dialog header="Waitng Slot Allocation" visible={showDialog} style={{ width: '50vw' }} onHide={() => { if (!showDialog) return; setVisible(false); }}>
+        <div className="flex flex-wrap gap-4 justify-center p-4">
+          {availableSlots.length > 0 ? (
+            availableSlots.map((slot) => (
+              <Chip
+                key={slot.id}
+                label={`Slot: ${slot.slotNumber}`}
+                className={`cursor-pointer p-chip-success transition-all duration-300 
+                                            ${selectedSlot === slot.id ? 'bg-blue-700 text-white' : 'hover:bg-gradient-to-r hover:from-blue-400 hover:to-blue-400'}
+                                            ${selectedSlot === slot.id ? '' : 'text-black'}`}
+                onClick={() => handleChipClick(slot)}
+              />
+            ))
+          ) : (
+            <p className="text-center">No available slots.</p>
+          )}
+        </div>
+        <div className="text-right mt-4">
+          <Button label="Confirm" className="p-button-sm p-button-success mr-2" onClick={() => setVisible(false)} />
+          <Button label="Cancel" className="p-button-sm p-button-secondary" onClick={() => setVisible(false)} />
+        </div>
+      </Dialog>
     </>
   );
 }
