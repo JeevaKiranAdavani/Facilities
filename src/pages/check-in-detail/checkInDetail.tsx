@@ -86,7 +86,7 @@ export default function CheckInDetail() {
       color: "#607D8B",
     },
     {
-      status: "WAITING",
+      status: "Waiting",
       date: "16/10/2020 10:00",
       icon: "pi pi-check",
       color: "#607D8B",
@@ -98,25 +98,25 @@ export default function CheckInDetail() {
       color: "#607D8B",
     },
     {
-      status: "REQUEST DOCUMENTS",
+      status: "Request Documents",
       date: "16/10/2020 10:00",
       icon: "pi pi-check",
       color: "#607D8B",
     },
     {
-      status: "DOCUMENTS UPLOADED",
+      status: "Documents Uploaded",
       date: "16/10/2020 10:00",
       icon: "pi pi-check",
       color: "#607D8B",
     },
     {
-      status: "DRIVER CONFIRMATION",
+      status: "Driver Confirmation",
       date: "16/10/2020 10:00",
       icon: "pi pi-check",
       color: "#607D8B",
     },
     {
-      status: "COMPLETED",
+      status: "Completed",
       date: "16/10/2020 10:00",
       icon: "pi pi-check",
       color: "#607D8B",
