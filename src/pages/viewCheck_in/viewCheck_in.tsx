@@ -17,6 +17,7 @@ import { CustomerService } from "../services/Orders";
 // import "./viewCheck_in.scss";
 import { useNavigate } from "react-router-dom";
 import { Button } from "primereact/button";
+import { checkinDetails } from '../../services/serviceApis';
 interface Representative {
   name: string;
   image: string;
@@ -79,10 +80,24 @@ export default function ViewCheckIn() {
     }
   };
 
+
+const loadDetails = async () => {
+    try {
+        const response = await checkinDetails();
+        console.log(response, 'incomponent')
+    }
+     catch (err) {
+        //setApiError('Invalid credentials. Please try again.');
+    } finally {
+       // setLoading(false);
+    }
+};
+
   useEffect(() => {
     CustomerService.getCustomersMedium().then((data: Customer[]) => {
       setCustomers(getCustomers(data));
       setLoading(false);
+      loadDetails()
     });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 

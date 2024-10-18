@@ -13,3 +13,19 @@ export const login = async (username: string, password: string) => {
     throw error;
   }
 };
+
+export const checkinDetails = async () => {
+  try {
+    const response = await api.get('/dashboard/checkin',);
+    //const { jwtToken, role } = response.data;
+
+    // localStorage.setItem('jwtToken', jwtToken);
+    // localStorage.setItem('userRole', role);
+    console.log(response.data)
+    return response.data;
+
+  } catch (error) {
+    throw error;
+  }
+};
+
